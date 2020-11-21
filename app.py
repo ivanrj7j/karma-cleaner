@@ -90,32 +90,34 @@ def ask():
     global clean_folder
 
     directory = filedialog.askdirectory()
-    if listbox:
-        listbox.destroy()
-    if scan_btn:
-        scan_btn.destroy()
-    if clean_folder:
-        clean_folder.destroy()
-    # destroys listbox
-    i = 0
-    # this i will increment
-    listbox = tkinter.Listbox(window, width=50, height=5)
-    # creates a listbox
-    things = []
-    for files in os.listdir(directory):
-        if os.path.isfile(directory+'/'+files):
-            i = i+1
-            things.append(files)
-            listbox.insert(i, files)
-    # appends all needed files to list
-    listbox.pack()
-    clean_folder = tkinter.Button(
-        window, text='Clean Directory', command=lambda: clean(things, directory))
-    clean_folder.pack()
-    # a button that will clean folder
-    scan_btn = tkinter.Button(window, text='Scan Viruses', command=lambda: scan_for_virus(things, directory))
-    scan_btn.pack()
-    # creates and pack all the buttons and stuff
+    if directory != '':
+        # executes if a path is selected 
+        if listbox:
+            listbox.destroy()
+        if scan_btn:
+            scan_btn.destroy()
+        if clean_folder:
+            clean_folder.destroy()
+        # destroys listbox
+        i = 0
+        # this i will increment
+        listbox = tkinter.Listbox(window, width=50, height=5)
+        # creates a listbox
+        things = []
+        for files in os.listdir(directory):
+            if os.path.isfile(directory+'/'+files):
+                i = i+1
+                things.append(files)
+                listbox.insert(i, files)
+        # appends all needed files to list
+        listbox.pack()
+        clean_folder = tkinter.Button(
+            window, text='Clean Directory', command=lambda: clean(things, directory))
+        clean_folder.pack()
+        # a button that will clean folder
+        scan_btn = tkinter.Button(window, text='Scan Viruses', command=lambda: scan_for_virus(things, directory))
+        scan_btn.pack()
+        # creates and pack all the buttons and stuff
 
 
 window = tkinter.Tk()
